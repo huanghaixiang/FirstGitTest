@@ -127,9 +127,10 @@
 
         <!-- apache servlet api jar -->
         <dependency>
-            <groupId>org.apache.tomcat</groupId>
+           <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>6.0.37</version>
+            <scope>provided</scope>
+            <version>2.4</version>
         </dependency>
 		
 		<dependency>
