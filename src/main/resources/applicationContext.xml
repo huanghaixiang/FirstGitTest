@@ -10,17 +10,17 @@
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd"
-	default-lazy-init="true">
+	default-lazy-init="false">
 
 	<description>Spring公共配置 </description>
 
-	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
+	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 
 	<context:component-scan base-package="huang.*">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	  	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
 	  	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository" />  
-	</context:component-scan>
-
+	</context:component-scan>-->
+	<context:component-scan base-package="huang.bean,huang,controller,huang.idao,huang.model,huang.service" />
 
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
