@@ -9,7 +9,7 @@ public class UserDo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id ;
-    private String username ;
+    private String userno ;
     private String password ;
     public int getId() {
         return id;
@@ -17,13 +17,14 @@ public class UserDo implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getPassword() {
+    
+    public String getUserno() {
+		return userno;
+	}
+	public void setUserno(String userno) {
+		this.userno = userno;
+	}
+	public String getPassword() {
         return password;
     }
     public void setPassword(String password) {

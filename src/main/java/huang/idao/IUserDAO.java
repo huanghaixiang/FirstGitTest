@@ -1,12 +1,9 @@
 package huang.idao;
 
 import java.util.List;
-
-import org.springframework.stereotype.Repository;
-
-import huang.model.UserDo;
+import java.util.Map;
  
 public interface IUserDAO {
 
-    public List<UserDo> findAllUser() ;
+    public List<Map<String, Object>> findAllUser() ;
 }

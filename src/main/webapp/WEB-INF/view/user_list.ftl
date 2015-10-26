@@ -33,11 +33,11 @@
         <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">Username</span></td>
         <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">Password</span></td>
       </tr>
-      <#list userDo as user>
+      <#list userList as user>
       <tr>
-        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.id}</span></td>
-        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.username}</span></td>
-        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.password}</span></td>
+        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.USER_ID!!}</span></td>
+        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.USER_NO!!}</span></td>
+        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.PASSWORD!!}</span></td>
       </tr>
       </#list>
     </table></td>

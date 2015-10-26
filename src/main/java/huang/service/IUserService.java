@@ -1,9 +1,8 @@
 package huang.service;
 
 import java.util.List;
-
-import huang.model.UserDo;
+import java.util.Map;
 
 public interface IUserService {
-    public List<UserDo> findAllUser() ;
+    public List<Map<String, Object>> findAllUser() ;
 }
