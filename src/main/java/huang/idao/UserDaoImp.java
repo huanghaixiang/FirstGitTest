@@ -4,23 +4,19 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 @Repository
 public class UserDaoImp implements IUserDAO{
 	
-	private JdbcTemplate jdbcTemplate;
-
-	@Autowired
-	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
+	@Inject private JdbcTemplate jdbcTemplate;
 	
 	public List<Map<String, Object>> findAllUser() {
-		return jdbcTemplate.queryForList(" SELECT * FROM M_USERS ");
+		return jdbcTemplate.queryForList(" SELECT USER_ID id,USER_NO userno,PASSWORD password FROM M_USERS ");
 	}
 
+	public int addUser(String userNo,String passwd) {
+		return jdbcTemplate.update(" INSERT INTO M_USERS(USER_NO,PASSWORD) VALUES(?,?) ",userNo,passwd);
+	}
+	
 }

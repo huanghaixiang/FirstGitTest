@@ -39,7 +39,14 @@
 			<property name="minIdle" value="0" />
 			<property name="defaultAutoCommit" value="false" />
 		</bean>
-	
+		<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" abstract="false" lazy-init="false" autowire="default" >
+	        <property name="dataSource">
+	            <ref bean="dataSource" />
+	        </property>
+	    </bean>
+	    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource" />
+		</bean>
 	</beans>
 	
 	<!-- local development环境 -->
@@ -55,6 +62,14 @@
 			<property name="username" value="${jdbc.username}" />
 			<property name="password" value="${jdbc.password}" />
 			<property name="defaultAutoCommit" value="false" />
+		</bean>
+		<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" abstract="false" lazy-init="false" autowire="default" >
+	        <property name="dataSource">
+	            <ref bean="dataSource" />
+	        </property>
+	    </bean>
+	    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource" />
 		</bean>
 	</beans>
 	

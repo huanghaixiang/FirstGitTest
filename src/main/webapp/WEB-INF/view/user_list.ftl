@@ -1,11 +1,11 @@
 <#setting classic_compatible=true>
+<#assign basePath=request.contextPath />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>User List</title>
 <style type="text/css">
-<!--
 .STYLE1 {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -14,7 +14,6 @@
 }
 .STYLE13 {font-size: 24}
 .STYLE15 {font-family: Arial, Helvetica, sans-serif; font-size: 24px; }
--->
 </style>
 </head>
 
@@ -35,9 +34,9 @@
       </tr>
       <#list userList as user>
       <tr>
-        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.USER_ID!!}</span></td>
-        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.USER_NO!!}</span></td>
-        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.PASSWORD!!}</span></td>
+        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.id!!}</span></td>
+        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.userno!!}</span></td>
+        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.password!!}</span></td>
       </tr>
       </#list>
     </table></td>
@@ -49,5 +48,33 @@
     <td width="500" height="200">&nbsp;</td>
   </tr>
 </table>
+
+<h2>新增用户</h2>
+<form action="${basePath}/User/addUser" method="post">
+<input type="text" name="userno" value=""><br>
+<input type="text" name="password" value="">
+<input type="submit" value="submit">
+</form>
+<br>
+<h2>查询用户</h2>
+<form action="${basePath}/User/searchUser" method="post">
+<input type="text" name="keyword" value=""><br>
+<input type="submit" value="search">
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
