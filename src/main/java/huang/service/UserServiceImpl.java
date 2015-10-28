@@ -12,7 +12,7 @@ import huang.idao.IUserDAO;
 
 @Service
 @Transactional
-public class UserService implements IUserService {
+public class UserServiceImpl implements IUserService {
     
     @Inject
     private IUserDAO userDAO ;

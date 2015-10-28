@@ -2,12 +2,15 @@ package huang.model;
 
 import java.io.Serializable;
 
-public class UserDo implements Serializable {
+import io.searchbox.annotations.JestId;
+
+public class UserBean implements Serializable {
 
     /**
-	 * 
+	 * 人员信息bean
 	 */
 	private static final long serialVersionUID = 1L;
+	@JestId
 	private int id ;
     private String userno ;
     private String password ;

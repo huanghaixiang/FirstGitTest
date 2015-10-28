@@ -19,14 +19,11 @@
 
 <body>
 <table width="1500" height="600" border="0" cellpadding="0" cellspacing="0">
+  
   <tr>
     <td width="500" height="200">&nbsp;</td>
-    <td width="500" height="200" align="center" valign="middle"><div align="center"><span class="STYLE1">User List </span></div></td>
-    <td width="500" height="200">&nbsp;</td>
-  </tr>
-  <tr>
-    <td width="500" height="200">&nbsp;</td>
-    <td width="500" height="200"><table width="500" height="200" border="1" cellpadding="0" cellspacing="0">
+    <td width="500" height="200">
+    <table width="500" height="200" border="1" cellpadding="0" cellspacing="0">
       <tr>
         <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">ID</span></td>
         <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">Username</span></td>
@@ -39,14 +36,11 @@
         <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">${user.password!!}</span></td>
       </tr>
       </#list>
-    </table></td>
-    <td width="500" height="200">&nbsp;</td>
+    </table>
+    </td>
+     
   </tr>
-  <tr>
-    <td width="500" height="200">&nbsp;</td>
-    <td width="500" height="200">&nbsp;</td>
-    <td width="500" height="200">&nbsp;</td>
-  </tr>
+   
 </table>
 
 <h2>新增用户</h2>
@@ -55,6 +49,8 @@
 <input type="text" name="password" value="">
 <input type="submit" value="submit">
 </form>
+<br>
+<br>
 <br>
 <h2>查询用户</h2>
 <form action="${basePath}/User/searchUser" method="post">

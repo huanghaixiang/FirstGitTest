@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="huang.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="huang.model.UserBean" >
+  	<id column="USER_ID" property="id" />
+    <result column="USER_NO" property="userno" />
+    <result column="PASSWORD" property="password" />
+  </resultMap>
+  <sql id="base_column_list" >
+   		USER_ID,USER_NO,PASSWORD
+  </sql>
+  <sql id="base_query_params">
+    <where>
+    	1=1
+		<if test="id != null and id != ''">
+			and USER_ID =  #{id}
+		</if>
+		<if test="userno != null and userno != ''">
+			and USER_NO =  #{userno}
+		</if>
+		<if test="password != null and password != ''">
+			and PASSWORD =  #{password}
+		</if>
+    </where>
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="base_column_list" />
+    from M_USERS
+    where USER_ID = #{id} limit 1
+  </select>
+  
+  <select id="countByParams" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select count(*) from M_USERS
+    <include refid="base_query_params"/>
+  </select>
+  <select id="findByParams" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="base_column_list" />
+    from M_USERS
+	<include refid="base_query_params"/>
+	<if test="orderBy != null">
+		order by ${orderBy}
+	</if>
+    limit #{offset},#{limit}
+  </select>
+
+  <insert id="insertSelective" parameterType="huang.model.UserBean" keyColumn="USER_ID" keyProperty="id" useGeneratedKeys="true">
+    insert into M_USERS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userno != null" >
+        USER_NO,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userno != null" >
+        #{userno},
+      </if>
+      <if test="password != null" >
+         #{password},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

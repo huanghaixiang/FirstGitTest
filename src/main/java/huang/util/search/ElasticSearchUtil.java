@@ -6,13 +6,14 @@ import java.util.List;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
-import huang.model.UserDo;
+import huang.model.UserBean;
 import huang.util.InitES;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Bulk;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
+import io.searchbox.core.Update;
 import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.IndicesExists;
 
@@ -32,7 +33,7 @@ public class ElasticSearchUtil {
              JestResult result = client.execute(indicesExists);
              if (!result.isSucceeded()) {
                  // Create articles index
-                 CreateIndex createIndex = new CreateIndex.Builder("articles").build();
+                 CreateIndex createIndex = new CreateIndex.Builder(indexName).build();
                  client.execute(createIndex);
              }
     		 Index index = new Index.Builder(obj).index(indexName).type(typeName).build();
@@ -41,13 +42,30 @@ public class ElasticSearchUtil {
              e.printStackTrace();
          }
     }
+    /**
+     * 更新索引
+     */
+    public static void update(String indexName,String typeName,Object obj){
+    	Update updateindex = new Update.Builder(obj).index(indexName).type(typeName).build();
+    	try {
+			client.execute(updateindex);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
+    }
+    
+    
+    
 	/**
 	 * 查询
 	 * @param <T>
 	 * @param query
 	 * @return 
 	 */
-    public static List<UserDo> search(String indexName,String typeName,String target) {
+    public static List<UserBean> search(String indexName,String typeName,String target) {
     	SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
     	searchSourceBuilder.query(QueryBuilders.queryStringQuery(target));
     	Search search = (Search) new Search.Builder(searchSourceBuilder.toString())
@@ -58,7 +76,7 @@ public class ElasticSearchUtil {
 
     	try {
 			JestResult result = client.execute(search);
-			List<UserDo> list = result.getSourceAsObjectList(UserDo.class);
+			List<UserBean> list = result.getSourceAsObjectList(UserBean.class);
 //			System.out.println(list.size()+list.get(0).getUserno());
 			return list;
 		} catch (IOException e) {
@@ -100,18 +118,18 @@ public class ElasticSearchUtil {
             e.printStackTrace();
         }
     }
+    
 	public static void main(String[] args){
 		
-		UserDo  user = new UserDo();
+		UserBean  user = new UserBean();
 		user.setId(1);
 		user.setPassword("123");
 		user.setUserno("2239");
 //		ElasticSearchUtil.index("users","users",user);
-		//�����������
 		
-		//��ʼ����
+		
 		ElasticSearchUtil.search("users", "users", "2239");
-		System.out.println("������ϣ��ȴ�5��");
+		System.out.println("暂停5秒");
 //		ElasticSearchUtil.search("2239");
 		try {
 			Thread.sleep(5000);
