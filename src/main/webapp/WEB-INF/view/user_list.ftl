@@ -25,8 +25,8 @@
     <td width="500" height="200">
     <table width="500" height="200" border="1" cellpadding="0" cellspacing="0">
       <tr>
-        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">ID</span></td>
-        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">Username</span></td>
+        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">id</span></td>
+        <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">userno</span></td>
         <td width="160" height="65" align="center" valign="middle"><span class="STYLE15">Password</span></td>
       </tr>
       <#list userList as user>

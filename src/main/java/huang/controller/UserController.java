@@ -48,16 +48,23 @@ public class UserController {
     public String addUser(HttpServletRequest request,UserBean ud){
 //    	int affect_count = userService.addUser(ud.getUserno(),ud.getPassword());
     	System.out.println(" user_id之前 : "+ ud.getId());
-    	int id = userMapper.insertSelective(ud);
+    	userMapper.insertSelective(ud);
     	System.out.println(" user_id之后 : "+ ud.getId());
-		if(id>0){    //新增成功，创建索引
+		if(ud.getId()>0){    //新增成功，创建索引
 			//去数据库查询，找id
+			System.out.println("build index");
 			ElasticSearchUtil.index("users", "users", userMapper.selectByPrimaryKey(ud.getId()));
 		}
 		
-    	return id>0?"success":"failure";
+    	return ud.getId()>0?"success":"failure";
     }
     
+    /**
+     * 根据关键词搜索
+     * @param request
+     * @param keyword
+     * @return
+     */
     @RequestMapping("/searchUser")
     public ModelAndView searchUser(HttpServletRequest request,String keyword){
     	if(StringUtil.isEmpty(keyword)) keyword = "*:*";

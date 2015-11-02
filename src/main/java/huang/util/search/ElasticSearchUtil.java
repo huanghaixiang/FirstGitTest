@@ -2,6 +2,7 @@ package huang.util.search;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -11,10 +12,12 @@ import huang.util.InitES;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Bulk;
+import io.searchbox.core.Delete;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.Update;
 import io.searchbox.indices.CreateIndex;
+import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.IndicesExists;
 
 public class ElasticSearchUtil {
@@ -29,13 +32,13 @@ public class ElasticSearchUtil {
     public static void index(String indexName,String typeName,Object obj){
     	 
     	 try {
-    		 IndicesExists indicesExists = new IndicesExists.Builder(indexName).build();
-             JestResult result = client.execute(indicesExists);
-             if (!result.isSucceeded()) {
-                 // Create articles index
-                 CreateIndex createIndex = new CreateIndex.Builder(indexName).build();
-                 client.execute(createIndex);
-             }
+//    		 IndicesExists indicesExists = new IndicesExists.Builder(indexName).build();
+//             JestResult result = client.execute(indicesExists);
+//             if (!result.isSucceeded()) {
+//                 // Create articles index
+//                 CreateIndex createIndex = new CreateIndex.Builder(indexName).build();
+//                 client.execute(createIndex);
+//             }
     		 Index index = new Index.Builder(obj).index(indexName).type(typeName).build();
     		 client.execute(index);
          } catch (IOException e) {
@@ -67,7 +70,9 @@ public class ElasticSearchUtil {
 	 */
     public static List<UserBean> search(String indexName,String typeName,String target) {
     	SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-    	searchSourceBuilder.query(QueryBuilders.queryStringQuery(target));
+    	searchSourceBuilder.query(QueryBuilders.multiMatchQuery(target, "id","userno"));
+//    	searchSourceBuilder.query(QueryBuilders.queryStringQuery(target));
+    	
     	Search search = (Search) new Search.Builder(searchSourceBuilder.toString())
     	                                // multiple index or types can be added.
     	                                .addIndex(indexName)
@@ -118,6 +123,27 @@ public class ElasticSearchUtil {
             e.printStackTrace();
         }
     }
+    
+    
+    /**
+     * 删除索引
+     * @param args
+     */
+    public void deleteIndex(String id){
+    	Delete deleteIndex = new Delete.Builder(id).build();
+    	try {
+			client.execute(deleteIndex);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
+    
+    
+    
+    
+    
     
 	public static void main(String[] args){
 		
