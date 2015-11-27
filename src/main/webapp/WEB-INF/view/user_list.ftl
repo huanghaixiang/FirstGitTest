@@ -54,7 +54,7 @@
 <br>
 <h2>查询用户</h2>
 <form action="${basePath}/User/searchUser" method="post">
-<input type="text" name="keyword" value=""><br>
+<input type="text" name="keyword" value="${keyword!!}"><br>
 <input type="submit" value="search">
 </form>
 

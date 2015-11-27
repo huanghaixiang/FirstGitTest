@@ -17,7 +17,7 @@
 	<description>Spring公共配置 </description>
 
 	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
-	<context:component-scan base-package="huang.service,huang.model,huang.idao,huang.mapper" />
+	<context:component-scan base-package="huang.service,huang.model" />
 
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
@@ -66,16 +66,6 @@
 	        </property>
 	    </bean>
 	    
-	    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-			<property name="dataSource" ref="dataSource" />
-			<property name="mapperLocations" value="classpath*:huang/mapper/*.xml" />
-			<property name="typeAliasesPackage" value="huang.model" />
-			<property name="configLocation" value="classpath:mybatis-config.xml"/>
-		</bean>
-		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-			<property name="basePackage" value="huang.mapper" />
-		</bean>
-	    
 	    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 			<property name="dataSource" ref="dataSource" />
 		</bean>
@@ -109,6 +99,45 @@
 			<aop:pointcut id="transactionPointcut" expression="execution(* huang.service..*Impl.*(..))" />
 			<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 		</aop:config>
+		
+		
+		<bean id="MyRealm" class="huang.model.MyRealm" />
+		
+		<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+			<property name="realm" ref="MyRealm" />
+		</bean>
+		
+		
+		<!-- Shiro Filter -->
+		<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+			<property name="securityManager" ref="securityManager" />
+			<property name="loginUrl" value="/login" />
+			<property name="successUrl" value="/user/list" />
+			<property name="unauthorizedUrl" value="/login" />
+			<property name="filterChainDefinitions">
+				<value>
+					/login = anon
+					/user/** = authc
+					/role/edit/* = perms[role:edit]
+					/role/save = perms[role:edit]
+					/role/list = perms[role:view]
+					/** = authc
+				</value>
+			</property>
+		</bean>
+		
+		
+		
+		
+		
+		
+		
+	
+		
+		
+		
+		
+		
 		
 	</beans>
 	
