@@ -117,11 +117,14 @@
 			<property name="filterChainDefinitions">
 				<value>
 					/login = anon
+					/bower_components/** = anon
+					/dist/**= anon
 					/user/** = authc
 					/role/edit/* = perms[role:edit]
 					/role/save = perms[role:edit]
 					/role/list = perms[role:view]
 					/** = authc
+					
 				</value>
 			</property>
 		</bean>
