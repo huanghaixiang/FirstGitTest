@@ -2,15 +2,12 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
    <modelVersion>4.0.0</modelVersion>
   <groupId>com.sina</groupId>
-  <artifactId>huang</artifactId>
+  <artifactId>manage</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>huang Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
-    <build>
-        <finalName>elasticSearch</finalName>
-    </build>
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
 		<springside.version>4.3.0-SNAPSHOT</springside.version>
@@ -29,19 +26,21 @@
 		
 		<junit.version>4.12</junit.version>
 		<assertj.version>1.7.0</assertj.version>
+		<jedis-version>2.7.3</jedis-version>
+		
 		<!-- Plugin的属性定义 -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.6</java.version>
 	
-		<!-- 项目属性 -->
-		<jdbc.driver.groupId>com.h2database</jdbc.driver.groupId>
-		<jdbc.driver.artifactId>h2</jdbc.driver.artifactId>
-		<jdbc.driver.version>${h2.version}</jdbc.driver.version>
-		<!--
-			<jdbc.driver.groupId>mysql</jdbc.driver.groupId>
-			<jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
-			<jdbc.driver.version>5.1.22</jdbc.driver.version>
-		-->	
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<maven.source.version>2.4</maven.source.version>
+		<maven.resources.version>2.7</maven.resources.version>
+		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+		<java.version>1.7</java.version>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
+		<project.module.version>0.0.1</project.module.version>
+
+		
 	</properties>
 
     <dependencies>
@@ -220,6 +219,91 @@
 			<artifactId>shiro-spring</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		
     </dependencies>
+
+    <build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<docencoding>${project.reporting.outputEncoding}</docencoding>
+					<charset>${project.reporting.outputEncoding}</charset>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+				</configuration>
+			</plugin>
+
+		</plugins>
+		<!-- 通过profile决定env, 根据env来试用不同的过滤文件来处理resources中的properties文件 -->
+		<filters>
+			<filter>./conf/filters/env-${env}.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>${basedir}/src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>${basedir}/src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>local</id>
+			<properties>
+				<env>local</env>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>sit</id>
+			<properties>
+				<env>sit</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>uat</id>
+			<properties>
+				<env>uat</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<env>prod</env>
+			</properties>
+		</profile>
+	</profiles>
+    
+    
+    
+    
 </project>

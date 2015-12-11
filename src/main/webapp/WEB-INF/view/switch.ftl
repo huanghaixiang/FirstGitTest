@@ -4,7 +4,15 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="${basePath}/bower_components/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" type="text/css">
+	<script src="${basePath}/bower_components/bootstrap-switch-master/dist/js/bootstrap-switch.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("[name='myswitch']").bootstrapSwitch();
+		});
+	</script>
 </head>
+
 
 <body id="index">
 	<div class="row">
@@ -39,6 +47,9 @@
                                 <button type="button" class="btn btn-primary">增量备份恢复</button>
                                 <button type="button" class="btn btn-primary">全量备份恢复</button>
                                 
+                                <div class="switch" data-animated="false">
+								    <input type="checkbox" name="myswitch" checked />
+								</div>
                             </p>
 	                    </div>
 	                    <div class="tab-pane fade" id="messages">

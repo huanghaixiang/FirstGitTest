@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+  <classPathEntry  location="C:\Users\hhx8303\.m2\repository\mysql\mysql-connector-java\5.1.32\mysql-connector-java-5.1.32.jar"/> 
+  <context id="context1" >
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/noah" userId="root" password="admin" />
+    <javaModelGenerator targetPackage="com.noah.manage.dao.domain" targetProject="manage" />
+    <sqlMapGenerator targetPackage="com.noah.manage.mapper" targetProject="manage" />
+    <javaClientGenerator targetPackage="com.noah.manage.mapper" targetProject="manage" type="XMLMAPPER" />
+    <table schema="" tableName="m_users" />
+  </context>
+</generatorConfiguration>
