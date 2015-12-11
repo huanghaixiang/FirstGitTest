@@ -12,7 +12,7 @@ import com.noah.manage.dao.mapper.MUsersMapper;
 @Service
 public class UserService {
 
-	@Autowired 
+ 	@Autowired 
 	private MUsersMapper musersMapper;
 	
 	/**
