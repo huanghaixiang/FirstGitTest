@@ -57,7 +57,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="${basePath}/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -79,7 +79,7 @@
                         </li>
                         
 	                    <li>
-	                       <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+	                       <a href="#"><i class="fa fa-gear fa-fw"></i>系统管理<span class="fa arrow"></span></a>
 	                       <ul class="nav nav-second-level">
 	                           <li>
 	                               <a href="${basePath}/user/userList">用户管理</a>

@@ -268,4 +268,11 @@
       is_delete = #{isDelete,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  
+  <select id="getAuthUrlListByUserId" parameterType="java.lang.String" resultType="String">
+  	SELECT url FROM m_user_roles ur, m_role_menu rm,m_menus me 
+	where ur.role_id = rm.role_id and me.menu_id = rm.menu_id 
+	and ur.is_delete =0 and ur.user_id=#{id,jdbcType=VARCHAR}
+  </select>
+  
 </mapper>

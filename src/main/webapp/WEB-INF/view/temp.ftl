@@ -37,17 +37,20 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>姓名</th>
-                                            <th>操作</th>
+                                            <th width="20%">ID</th>
+                                            <th width="40%">姓名</th>
+                                            <th width="40%">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd gradeX">
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 4.0</td>
-                                            <td>Win 95+</td>
+                                    	<#list userList as list>
+                                    	<tr class="odd gradeX">
+                                            <td>${list.userId!!}</td>
+                                            <td>${list.userName!!}</td>
+                                            <td></td>
                                         </tr>
+                                    	</#list>
+                                        
                                        
                                     </tbody>
                                 </table>

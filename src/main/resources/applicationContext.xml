@@ -19,40 +19,10 @@
 	<description>Spring公共配置 </description>
 
 	<!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
-	<context:component-scan base-package="com.noah.manage.service" />
-	
-	<beans>
-		<bean id="MyRealm" class="com.noah.manage.model.MyRealm" />
-		<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-			<property name="realm" ref="MyRealm" />
-		</bean>
-		
-		<!-- Shiro Filter -->
-		<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-			<property name="securityManager" ref="securityManager" />
-			<property name="loginUrl" value="/login" />
-			<property name="successUrl" value="/index" />
-			<property name="unauthorizedUrl" value="/login" />
-			<property name="filterChainDefinitions">
-				<value>
-					/login = anon
-					/verifyLogin = anon
-					/bower_components/** = anon
-					/favicon.ico = anon
-					/dist/**= anon
-					/user/** = authc
-					/role/edit/* = perms[role:edit]
-					/role/save = perms[role:edit]
-					/role/list = perms[role:view]
-					/** = authc
-					
-				</value>
-			</property>
-		</bean>
-	</beans>
+	<context:component-scan base-package="com.noah.manage.service,com.noah.manage.filter" />
 	
 	
-	<beans profile="prod">
+<!-- 	<beans profile="prod">
 		<context:property-placeholder location="classpath*:/conf/base.properties" properties-ref="extConf" local-override="true" />
 		<util:properties id="extConf" location="file:/opt/conf/manage/base.properties" ignore-resource-not-found="true"/>
 	</beans>
@@ -66,5 +36,5 @@
 		<context:property-placeholder location="classpath*:/conf/base.properties" properties-ref="extConf" local-override="true" />
 		<util:properties id="extConf" location="file:/opt/conf/manage/base.properties" ignore-resource-not-found="true"/>
 	</beans>
-	
+	 -->
 </beans>

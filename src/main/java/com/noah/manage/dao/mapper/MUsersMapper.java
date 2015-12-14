@@ -94,4 +94,12 @@ public interface MUsersMapper {
      * @mbggenerated Fri Dec 11 11:29:10 CST 2015
      */
     int updateByPrimaryKey(MUsers record);
+    
+    /**
+     * 根据id查找可访问的URL
+     * @param userId
+     * @return
+     */
+    List<String> getAuthUrlListByUserId(String id);
+    
 }

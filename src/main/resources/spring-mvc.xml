@@ -64,6 +64,6 @@
 	<mvc:default-servlet-handler/>
 	
 	<!-- 默认访问跳转到登录页面(即定义无需Controller的url<->view直接映射) -->  
-    <mvc:view-controller path="/" view-name="forward:/login"/>
+    <mvc:view-controller path="/" view-name="forward:/index"/>
 	<mvc:resources location="image/favicon.ico" mapping="favicon.ico"/>
 </beans>

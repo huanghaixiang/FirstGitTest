@@ -250,7 +250,7 @@
 		</plugins>
 		<!-- 通过profile决定env, 根据env来试用不同的过滤文件来处理resources中的properties文件 -->
 		<filters>
-			<filter>./conf/filters/env-${env}.properties</filter>
+			<filter>./conf/env-${env}.properties</filter>
 		</filters>
 		<resources>
 			<resource>
@@ -264,12 +264,6 @@
 				</includes>
 			</resource>
 		</resources>
-		<testResources>
-			<testResource>
-				<directory>${basedir}/src/test/resources</directory>
-				<filtering>true</filtering>
-			</testResource>
-		</testResources>
 	</build>
 
 	<profiles>

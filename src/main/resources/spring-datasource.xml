@@ -12,16 +12,14 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-
-
 	<tx:annotation-driven />
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
 		<property name="targetDataSource">
 			<bean id="dataSourceTarget" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
-				<property name="url" value="jdbc:mysql://localhost:3306/noah?useUnicode=true&amp;characterEncoding=utf-8"/>
-				<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-				<property name="username" value="root" />
-				<property name="password" value="admin" />
+				<property name="url" value="${jdbc.url}"/>
+				<property name="driverClassName" value="${jdbc.driver}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
 				<property name="initialSize" value="0" />
 				<property name="minIdle" value="2" /><!-- min conn,lt will be created -->
 				<property name="maxWait" value="5000" /><!-- ms -->
@@ -46,10 +44,11 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+		
 	<bean id="testBean" class="com.noah.manage.model.TestBean">
 		<property name="jdbc" value="${jdbc.url}"></property>
 		<property name="username" value="${jdbc.username}"></property>
 		<property name="url" value="sad"></property>
 	</bean>
-
+	
 </beans>
