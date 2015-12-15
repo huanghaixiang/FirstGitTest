@@ -1,7 +1,5 @@
 package com.noah.manage.model;
 
-import java.util.List;
-
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.shiro.SecurityUtils;
@@ -54,6 +52,7 @@ public class MyRealm extends AuthorizingRealm {
 //			sazi.addRoles(userService.getRolesAsString(userId));
 //			List<String> temp = userService.getAuthUrlByUserId(userId.toString());
 			sazi.addStringPermissions(userService.getAuthUrlByUserId(userId.toString()));
+			sazi.addRoles(userService.getRolesByUserId(userId.toString()));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

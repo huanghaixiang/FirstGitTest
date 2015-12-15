@@ -81,9 +81,11 @@
 	                    <li>
 	                       <a href="#"><i class="fa fa-gear fa-fw"></i>系统管理<span class="fa arrow"></span></a>
 	                       <ul class="nav nav-second-level">
+	                           <@shiro.hasPermission name="/user/userList" >
 	                           <li>
 	                               <a href="${basePath}/user/userList">用户管理</a>
 	                           </li>
+	                           </@shiro.hasPermission>
 	                           <li>
 	                               <a href="morris.html">角色管理</a>
 	                           </li>

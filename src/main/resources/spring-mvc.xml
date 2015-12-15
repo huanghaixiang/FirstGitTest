@@ -58,6 +58,11 @@
                 <prop key="url_escaping_charset">UTF-8</prop>
             </props>
         </property>
+        <property name="freemarkerVariables">  
+       		<map>   
+           		<entry key="shiro"  value-ref="shiroTags"/>   
+       		</map>   
+   		</property>  
     </bean>
 	
 	<!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL-->	

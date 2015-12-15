@@ -48,12 +48,13 @@ public class UserService {
 	 * @param userId
 	 * @return
 	 */
-	@Cacheable(value = "manage", key = "'getAuthUrlByUserId_'+#userId")
+	@Cacheable(value = "managecache", key = "'getAuthUrlByUserId_'+#userId")
 	public List<String> getAuthUrlByUserId(String userId){
 		return musersMapper.getAuthUrlListByUserId(userId);
-//		if(list==null || list.size()==0){
-//			return "";
-//		}
-//		return StringUtils.join(list,",");
 	}
+	@Cacheable(value = "managecache", key = "'getRolesByUserId_'+#userId")
+	public List<String> getRolesByUserId(String userId){
+		return musersMapper.getRolesByUserId(userId);
+	}
+	
 }

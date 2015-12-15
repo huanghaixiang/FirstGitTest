@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.noah.manage.constant.system.RoleFlag;
+
 /**
  * 权限访问的过滤器
  * @author caomei
@@ -72,7 +74,14 @@ public class FramePermissionsAuthorizationFilter extends
 		 }else{
 		     permitted= subject.isPermitted(uri);
 		 }
-//		return true;
+		 if(!permitted){
+			 try{
+				 subject.checkRole(RoleFlag.ADMIN.getValue());
+				 permitted = true;
+			 }catch(Exception e){ //不是管理员角色会抛出异常
+				 System.out.println(e.getMessage());
+			 }
+		 }
 		return permitted;
 
 	}

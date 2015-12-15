@@ -47,7 +47,9 @@
                                     	<tr class="odd gradeX">
                                             <td>${list.userId!!}</td>
                                             <td>${list.userName!!}</td>
-                                            <td></td>
+                                            <td> 
+                                            	
+                                            </td>
                                         </tr>
                                     	</#list>
                                         

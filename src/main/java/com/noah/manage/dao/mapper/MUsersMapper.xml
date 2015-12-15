@@ -274,5 +274,10 @@
 	where ur.role_id = rm.role_id and me.menu_id = rm.menu_id 
 	and ur.is_delete =0 and ur.user_id=#{id,jdbcType=VARCHAR}
   </select>
+
+  <select id="getRolesByUserId" parameterType="java.lang.String" resultType="String">
+  	select role_flag from m_user_roles ur,m_roles role 
+  	where ur.role_id = role.role_id and ur.is_delete=0 and user_id=#{id,jdbcType=VARCHAR}
+  </select>
   
 </mapper>

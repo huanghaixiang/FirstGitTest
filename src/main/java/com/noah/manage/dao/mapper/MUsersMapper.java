@@ -101,5 +101,10 @@ public interface MUsersMapper {
      * @return
      */
     List<String> getAuthUrlListByUserId(String id);
-    
+    /**
+     * 根据id查找用户的角色
+     * @param id
+     * @return
+     */
+    List<String> getRolesByUserId(String id);
 }
